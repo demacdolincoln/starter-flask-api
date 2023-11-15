@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, url_for, redirect
+from flask import Flask, render_template, request, url_for, redirect, session
 import os
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, EmailField, SelectField
@@ -70,6 +70,7 @@ class UserForm(FlaskForm):
 #                               database                                       #
 ################################################################################
 
+
 def access_db():
     dynamodb = boto3.resource("dynamodb", os.getenv("AWS_REGION"))
     return dynamodb.Table(os.getenv("CYCLIC_DB"))
@@ -104,7 +105,7 @@ def list_all():
         content[i] = (j, [])
 
         for p in result["Items"]:
-            content[i][1].append(p['participante'])
+            content[i][1].append(p["participante"])
     return content
 
 
@@ -142,20 +143,26 @@ def index():
         max_participantes=max_participantes,
     )
 
+
 @app.route("/sucesso")
 def sucesso():
     return render_template("sucesso.html")
+
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
     form = UserForm()
     if request.method == "POST" and form.validate():
         if form.password.data == os.getenv("password"):
+            session["login"] = "loged"
             return redirect(url_for("inscritos"))
     return render_template("login.html", form=form)
 
 
 @app.route("/inscritos")
 def inscritos():
-    all_participants = list_all()
-    return render_template("inscritos.html", all_participants=all_participants)
+    if "login" in session.keys():
+        all_participants = list_all()
+        return render_template("inscritos.html", all_participants=all_participants)
+    else:
+        return redirect(url_for("login"))
