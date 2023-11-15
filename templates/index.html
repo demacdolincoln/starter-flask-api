@@ -6,6 +6,7 @@
   </head>
   <body>
   <div class="center">
+  <h1>Selecione o minicurso que deseja participar</h1>
     <form method="post" enctype="multipart/form-data" class="">
       {{form.csrf_token}}
       <div>
@@ -27,6 +28,7 @@
       <span>{{message}}</span>
     </div>
     {% endif %}
+    <!--
     {% for i, titulo, quantidade in parcial_inscritos%}
       <div>{{titulo}}</div>
       {% if parcial_inscritos[i][2] <= max_participantes %}
@@ -39,6 +41,7 @@
       </div>
       {% endif %}
     {% endfor %}
+    -->
     </div>
   </body>
 </html>
