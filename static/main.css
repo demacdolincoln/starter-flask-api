@@ -1,8 +1,33 @@
 .center {
   border: 5px solid;
+  border-color: green;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 10px;
+}
+
+.titles {
+  padding: 5px;
+  margin: 10px;
+  border-radius: 25px;
+}
+
+
+.yes {
+  background-color: #c3ffc8;
+}
+
+
+.no {
+  background-color: #ff9c9e;
+}
+
+.alert {
+  margin: 10px;
+  padding: 15px;
+  background-color: #8B0000;
+  color: white;
+  border-radius: 25px;
 }

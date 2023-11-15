@@ -25,23 +25,16 @@
     </form>
     {% if message %}
     <div>
-      <span>{{message}}</span>
+      <span class="alert">{{message}}</span>
     </div>
     {% endif %}
-    <!--
+
+    <p>Abaixo está a lista de minicursos indicando a disponibilidade de vagas até o momento.</p>
+    <p>Os cursos com o fundo de cor <span class="yes">...</span> estão com vagas disponíveis e os com fundo de cor <span class="no">...</span> estão com vagas esgotadas.</p>
+    
     {% for i, titulo, quantidade in parcial_inscritos%}
-      <div>{{titulo}}</div>
-      {% if parcial_inscritos[i][2] <= max_participantes %}
-      <div class="ok">
-          há vagas
-      </div>
-      {% else %}
-      <div class="not">
-          não há vagas
-      </div>
-      {% endif %}
+      <div class ="titles {% if parcial_inscritos[i][2] <= max_participantes %}yes{% else %}no{% endif %}">{{titulo}}</div>
     {% endfor %}
-    -->
     </div>
   </body>
 </html>
