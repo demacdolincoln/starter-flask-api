@@ -1,0 +1,12 @@
+{% from "_formhelpers.html" import render_field %}
+<!doctype html>
+<html>
+  <head></head>
+  <body>
+    <form method="post" enctype="multipart/form-data">
+      {{form.csrf_token}}
+      {{render_field(form.password)}}
+      <p><input type=submit value=Enviar>
+    </form>
+  </body>
+</html>

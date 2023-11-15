@@ -1,7 +1,44 @@
+{% from "_formhelpers.html" import render_field %}
 <!doctype html>
-<title>Hello from Flask</title>
-{% if name %}
-  <h1>Hello {{ name }}!</h1>
-{% else %}
-  <h1>Hello, World!</h1>
-{% endif %}
+<html>
+  <head>
+  <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}"
+  </head>
+  <body>
+  <div class="center">
+    <form method="post" enctype="multipart/form-data" class="">
+      {{form.csrf_token}}
+      <div>
+      {{render_field(form.name)}}
+      </div>
+      <div>
+      {{render_field(form.email)}}
+      </div>
+      <div>
+      {{render_field(form.cpf)}}
+      </div>
+      <div>
+      {{render_field(form.minicurso)}}
+      </div>
+      <p><input type=submit value=Enviar>
+    </form>
+    {% if message %}
+    <div>
+      <span>{{message}}</span>
+    </div>
+    {% endif %}
+    {% for i, titulo, quantidade in parcial_inscritos%}
+      <div>{{titulo}}</div>
+      {% if parcial_inscritos[i][2] <= max_participantes %}
+      <div class="ok">
+          há vagas
+      </div>
+      {% else %}
+      <div class="not">
+          não há vagas
+      </div>
+      {% endif %}
+    {% endfor %}
+    </div>
+  </body>
+</html>
